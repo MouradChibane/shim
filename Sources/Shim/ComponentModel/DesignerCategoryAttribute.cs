@@ -25,14 +25,41 @@ namespace System.ComponentModel
     [AttributeUsageAttribute(AttributeTargets.All)]
     public sealed class DesignerCategoryAttribute : Attribute
     {
+        #region FIELDS
+
+#if !PCL
+         private readonly string _category;
+#endif
+
+        #endregion
+
         #region CONSTRUCTORS
 
-        /// <include file='../_Doc/System.xml' path='doc/members/member[@name="M:System.ComponentModel.DesignerCategoryAttribute.#ctor(System.Boolean)"]/*' />
-        public DesignerCategoryAttribute(bool browsable)
+        /// <include file='../_Doc/System.xml' path='doc/members/member[@name="M:System.ComponentModel.DesignerCategoryAttribute.#ctor(System.String)"]/*' />
+        public DesignerCategoryAttribute(string category)
         {
 #if PCL
             throw new PlatformNotSupportedException("PCL");
+#else
+            _category = category;
 #endif
+        }
+
+        #endregion
+
+        #region PROPERTIES
+
+        /// <include file='../_Doc/System.xml' path='doc/members/member[@name="P:System.ComponentModel.DesignerCategoryAttribute.Category"]/*' />
+        public string Category
+        {
+            get
+            {
+#if PCL
+                throw new PlatformNotSupportedException("PCL");
+#else
+                return _category;
+#endif
+            }
         }
 
         #endregion
